@@ -1,15 +1,17 @@
 import pygame as pg
+from engine.SETTINGS import WIDTH, HEIGHT, TITLE
 
 pg.init()
 
 class Screen:
-    screen = None
+    pg.display.set_caption(TITLE)
+    screen = pg.display.set_mode((WIDTH, HEIGHT))
     sceneControl = None
-    def createScreen(w, h, t, s):
-        pg.display.set_caption(t)
-        Screen.screen = pg.display.set_mode((w, h))
-        Screen.sceneControl = s
+    def setSceneControl(scene):
+        Screen.sceneControl = scene
     def playScene():
         Screen.sceneControl.playCurrentScene(Screen.screen)
     def getScreenSize():
         return (Screen.screen.get_width(), Screen.screen.get_height())
+    def getScreenRect():
+        return Screen.screen.get_rect()

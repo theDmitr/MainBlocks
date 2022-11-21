@@ -1,0 +1,3 @@
+TITLE = "MineBlocks"
+WIDTH = 400
+HEIGHT = 400
