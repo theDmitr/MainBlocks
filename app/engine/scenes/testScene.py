@@ -1,13 +1,15 @@
 import pygame as pg
 from pygame.time import Clock
 from engine.objects.block import Block
+from engine.screen import Screen
+from engine.generator.landscapeGenerator import generateLandscape
 pg.init()
 FPS = 60
 clock = Clock()
+CENTERX = Screen.getScreenRect().centerx
+CENTERY = Screen.getScreenRect().centery
 class testScene:
-    block_1 = Block(50, 250, "grass")
-    block_2 = Block(50, 290, "dirt")
-    block_3 = Block(50, 330, "stone")
+    blocks = generateLandscape(Block.WIDTH, Block.HEIGHT, 5, startY = 100)
     def play(surface):
         testScene.eventListener()
         testScene.renderer(surface)
@@ -15,9 +17,10 @@ class testScene:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 quit()
+            if event.type == pg.MOUSEBUTTONDOWN:
+                testScene.blocks = generateLandscape(Block.WIDTH, Block.HEIGHT, 5, startY = 100)
     def renderer(surface):
         clock.tick(FPS)
         surface.fill((255, 255, 255))
-        testScene.block_1.draw(surface)
-        testScene.block_2.draw(surface)
-        testScene.block_3.draw(surface)
+        for i in testScene.blocks:
+            i.draw(surface)
