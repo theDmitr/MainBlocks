@@ -11,3 +11,12 @@ class Block:
         self.rect.x, self.rect.y = x, y
     def draw(self, surface):
         surface.blit(self.texture1, self.rect)
+class Block_grass(Block):
+    def __init__(self, x, y):
+        super().__init__(x, y, "grass")
+class Block_dirt(Block):
+    def __init__(self, x, y):
+        super().__init__(x, y, "dirt")
+class Block_stone(Block):
+    def __init__(self, x, y):
+        super().__init__(x, y, "stone")
