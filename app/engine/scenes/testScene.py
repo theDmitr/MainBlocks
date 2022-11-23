@@ -1,15 +1,17 @@
 import pygame as pg
 from pygame.time import Clock
-from engine.objects.blocks.block import Block
 from engine.screen import Screen
-from engine.generator.landscapeGenerator import generateLandscape
+from engine.generator.landscapeGenerator import Landscape
 pg.init()
 FPS = 60
 clock = Clock()
+
 CENTERX = Screen.getScreenRect().centerx
 CENTERY = Screen.getScreenRect().centery
+
+map = Landscape(20)
+
 class testScene:
-    blocks = generateLandscape(Block.WIDTH, Block.HEIGHT, Screen.getScreenSize()[0] // Block.WIDTH + 1, startY = 100)
     def play(surface):
         testScene.eventListener()
         testScene.renderer(surface)
@@ -17,15 +19,18 @@ class testScene:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 quit()
-            elif event.type == pg.MOUSEBUTTONDOWN:
-                testScene.blocks = generateLandscape(Block.WIDTH, Block.HEIGHT, Screen.getScreenSize()[0] // Block.WIDTH + 1, startY = 100)
             elif event.type == pg.KEYDOWN:
-                for column in testScene.blocks:
-                    for block in column:
-                        block.move(block.getPos()[0] + 5, block.getPos()[1])
+                map.regenerate()
+            for column in map.columns:
+                for block in column.blocks:
+                    if event.type == pg.MOUSEBUTTONDOWN:
+                        if block.getCollisionByPoint(event.pos): 
+                            column.blocks.remove(block)
+                    elif event.type == pg.MOUSEMOTION:
+                        if block.getCollisionByPoint(event.pos): block.cursor = True
+                        else: block.cursor = False
     def renderer(surface):
         clock.tick(FPS)
         surface.fill((255, 255, 255))
-        for column in testScene.blocks:
-            for block in column:
-                block.draw(surface)
+        for column in map.columns:
+            for block in column.blocks: block.draw(surface)

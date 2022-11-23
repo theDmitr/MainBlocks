@@ -6,4 +6,5 @@ from engine.screen import Screen
 Screen.setSceneControl(Scene)
 Scene.setCurrentScene(testScene)
 
-while True: Screen.playScene()
+while True: 
+    Screen.playScene()
