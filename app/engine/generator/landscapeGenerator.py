@@ -1,6 +1,7 @@
 from engine.objects.blocks.block import Block_grass, Block_dirt, Block_stone, Block
+from pygame import Surface
 from random import randint
-
+from engine.screen import Screen
 class Landscape:
     columns = []
     def __init__(self, lenght):
@@ -10,9 +11,17 @@ class Landscape:
     def generate(self, lenght, startY = 100):
         gen = Generator()
         columns = [gen.generateColumn(x, startY) for x in range(lenght)]
-        self.xLimitLeft, self.xLimitRight = columns[0].x, columns[-1].x
+        self.xLimitLeft, self.xLimitRight = columns[0].x * Block.WIDTH, columns[-1].x * Block.WIDTH + Block.WIDTH
         self.columns = columns
         self.lenght = lenght
+        self.surface = Surface((self.xLimitRight, Screen.getScreenRect().h))
+    def getSurface(self):
+        self.surface.fill((255, 255, 255))
+        self.draw(self.surface)
+        return self.surface
+    def draw(self, surface):
+        for column in self.columns:
+            for block in column.blocks: block.draw(surface)
 
 class Column:
     blocks = []
