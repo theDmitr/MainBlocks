@@ -12,8 +12,6 @@ class Block:
         self.rect.x, self.rect.y = x, y
     def afterBreak(self):
         return
-    def getCollisionByPoint(self, pos):
-        return self.rect.collidepoint(pos)
     def draw(self, surface):
         surface.blit(self.texture1, self.rect)
         if self.cursor: pg.draw.rect(surface, (50, 50, 50), self.rect, 1)

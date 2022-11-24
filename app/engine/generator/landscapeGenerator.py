@@ -12,9 +12,10 @@ class Landscape:
         gen = Generator()
         columns = [gen.generateColumn(x, startY) for x in range(lenght)]
         self.xLimitLeft, self.xLimitRight = columns[0].x * Block.WIDTH, columns[-1].x * Block.WIDTH + Block.WIDTH
+        self.yLimitDown = columns[0].y + len(columns[0].blocks) * Block.HEIGHT
         self.columns = columns
         self.lenght = lenght
-        self.surface = Surface((self.xLimitRight, Screen.getScreenRect().h))
+        self.surface = Surface((self.xLimitRight, self.yLimitDown))
     def getSurface(self):
         self.surface.fill((255, 255, 255))
         self.draw(self.surface)
