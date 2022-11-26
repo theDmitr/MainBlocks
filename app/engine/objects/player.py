@@ -8,5 +8,5 @@ class Player:
         self.rect = pg.Rect(x, y, Player.WIDTH, Player.HEIGHT)
         self.speed = 3
         self.moveX, self.moveY = 0, 0
-    def draw(self, surface):
-        pg.draw.rect(surface, (0, 255, 0), self.rect, 2)
+    def draw(self, surface, x, y):
+        pg.draw.rect(surface, (0, 255, 0), pg.Rect(self.rect.x + x, self.rect.y + y, self.rect.w, self.rect.h), 2)
