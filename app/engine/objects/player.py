@@ -4,6 +4,7 @@ from engine.objects.blocks.block import Block
 class Player:
     WIDTH = Block.WIDTH
     HEIGHT = Block.HEIGHT * 2
+    blockBreakLenght = 3
     def __init__(self, x, y):
         self.rect = pg.Rect(x, y, Player.WIDTH, Player.HEIGHT)
         self.speed = 3

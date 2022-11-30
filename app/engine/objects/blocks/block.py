@@ -8,9 +8,9 @@ class Block:
         self.texture1 = pg.transform.scale(pg.image.load(rf"app\assets\textures\blocks\{texture}.png"), (self.WIDTH, self.HEIGHT))
     def afterBreak(self):
         return
-    def draw(self, surface):
-        surface.blit(self.texture1, self.rect)
-        if self.cursor: pg.draw.rect(surface, (50, 50, 50), self.rect, 1)
+    def draw(self, surface, xOffset, yOffSet):
+        surface.blit(self.texture1, (self.rect.x + xOffset, self.rect.y + yOffSet, self.rect.w, self.rect.h))
+        if self.cursor: pg.draw.rect(surface, (50, 50, 50), (self.rect.x + xOffset, self.rect.y + yOffSet, self.rect.w, self.rect.h), 1)
 
 class Block_grass(Block):
     def __init__(self, x, y):

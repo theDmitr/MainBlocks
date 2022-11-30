@@ -1,10 +1,9 @@
-from engine.scene import Scene
-from engine.scenes.menu import Menu
-from engine.scenes.testScene import testScene
+from engine.scene.scene import Scene
+from engine.scene.scenes.game import Game
 from engine.screen import Screen
 
 Screen.setSceneControl(Scene)
-Scene.setCurrentScene(testScene)
+Scene.setCurrentScene(Game)
 
 while True: 
     Screen.playScene()
