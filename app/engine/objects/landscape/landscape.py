@@ -1,6 +1,5 @@
 from engine.objects.blocks.block import Block
 from engine.objects.landscape.generator import Generator
-from pygame import Surface
 
 class Landscape:
     columns = []

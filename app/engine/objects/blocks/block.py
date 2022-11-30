@@ -2,6 +2,7 @@ import pygame as pg
 pg.init()
 class Block:
     WIDTH, HEIGHT = 40, 40
+    cursorColor = (50, 50, 50)
     cursor = False
     def __init__(self, x, y, texture):
         self.rect = pg.Rect(x, y, Block.WIDTH, Block.HEIGHT)
@@ -10,7 +11,7 @@ class Block:
         return
     def draw(self, surface, xOffset, yOffSet):
         surface.blit(self.texture1, (self.rect.x + xOffset, self.rect.y + yOffSet, self.rect.w, self.rect.h))
-        if self.cursor: pg.draw.rect(surface, (50, 50, 50), (self.rect.x + xOffset, self.rect.y + yOffSet, self.rect.w, self.rect.h), 1)
+        if self.cursor: pg.draw.rect(surface, Block.cursorColor, (self.rect.x + xOffset, self.rect.y + yOffSet, self.rect.w, self.rect.h), 1)
 
 class Block_grass(Block):
     def __init__(self, x, y):

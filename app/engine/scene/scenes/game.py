@@ -86,4 +86,5 @@ class Game:
         for column in landscape.columns[leftHalf : rightHalf]:
             for block in column.blocks:
                 block.draw(surface, -camera.xOffset, -camera.yOffset)
+                if block.cursor: pg.draw.line(surface, Block.cursorColor, (player.rect.center[0] - camera.xOffset, player.rect.center[1] - camera.yOffset),(block.rect.center[0] - camera.xOffset, block.rect.center[1] - camera.yOffset), 1)
         player.draw(surface, -camera.xOffset, -camera.yOffset)
