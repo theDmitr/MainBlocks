@@ -1,4 +1,4 @@
-from engine.objects.blocks.block import Block, Block_dirt, Block_grass, Block_stone
+from engine.objects.blocks.block import Block, Block_dirt, Block_grass, Block_stone, Block_bedrock
 from engine.objects.landscape.column import Column
 from random import randint
 
@@ -14,6 +14,7 @@ class Generator:
         column.append(Block_grass(x, y))
         for i in range(1, 4):
             column.append(Block_dirt(x, y + Block.HEIGHT * i))
-        while column[-1].rect.bottom < self.yHigher:
+        while column[-1].rect.bottom < self.yHigher - Block.HEIGHT:
             column.append(Block_stone(x, column[-1].rect.y + Block.HEIGHT))
+        column.append(Block_bedrock(x, column[-1].rect.y + Block.HEIGHT))
         return Column(x, y, column)

@@ -24,3 +24,7 @@ class Block_dirt(Block):
 class Block_stone(Block):
     def __init__(self, x, y):
         super().__init__(x, y, "stone")
+
+class Block_bedrock(Block):
+    def __init__(self, x, y):
+        super().__init__(x, y, "bedrock")
