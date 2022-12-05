@@ -1,6 +1,6 @@
-from engine.scene.scene import Scene
-from engine.scene.scenes.game import Game
-from engine.screen import Screen
+from src.scene.scene import Scene
+from src.scene.scenes.Game import Game
+from src.screen.screen import Screen
 
 Screen.setSceneControl(Scene)
 Scene.setCurrentScene(Game)
