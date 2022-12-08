@@ -13,9 +13,11 @@ FPS = 60
 clock = Clock()
 edges = (WIDTH // Block.WIDTH // 2, HEIGHT // Block.HEIGHT // 2)
 
-landscape = Landscape(100)
-landscape.preGenerate(edges[0], edges[0])
-#landscape = MapLoader.getMapFromFile("myMap")
+try:
+    landscape = MapLoader.getMapFromFile("map")
+except:
+    landscape = Landscape(100)
+    landscape.preGenerate(edges[0], edges[0])
 
 player = Player(landscape.columns[edges[0]].x, landscape.columns[edges[0]].y - Player.HEIGHT)
 camera = Camera(player.rect)
@@ -41,7 +43,9 @@ class Game:
         mouseClick, mouseButton = None, None
 
         for event in events:
-            if event.type == pg.QUIT: quit()
+            if event.type == pg.QUIT:
+                MapLoader.saveMapToFile("map", landscape)
+                quit()
             elif event.type == pg.MOUSEBUTTONDOWN: 
                 mouseClick = event.pos
                 mouseButton = event.button
@@ -104,5 +108,4 @@ class Game:
         for column in landscape.columns[leftHalf : rightHalf]:
             for block in column.blocks[:]:
                 block.draw(surface, -camera.xOffset, -camera.yOffset)
-                if block.cursor: pg.draw.line(surface, Block.cursorColor, (player.rect.center[0] - camera.xOffset, player.rect.center[1] - camera.yOffset),(block.rect.center[0] - camera.xOffset, block.rect.center[1] - camera.yOffset), 1)
         player.draw(surface, -camera.xOffset, -camera.yOffset)

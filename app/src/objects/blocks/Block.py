@@ -25,12 +25,26 @@ class Block_stone(Block):
     def __init__(self, x, y):
         super().__init__(x, y, "stone")
 
+class Block_glass(Block):
+    def __init__(self, x, y):
+        super().__init__(x, y, "glass")
+
+class Block_lapis_ore(Block):
+    def __init__(self, x, y):
+        super().__init__(x, y, "lapis_ore")
+
+class Block_podzol(Block):
+    def __init__(self, x, y):
+        super().__init__(x, y, "podzol")
+
 class Block_bedrock(Block):
     def __init__(self, x, y):
         super().__init__(x, y, "bedrock")
 
 class Block_air(Block):
     def __init__(self, x, y):
-        super().__init__(x, y, "glass")
+        self.rect = pg.Rect(x, y, Block.WIDTH, Block.HEIGHT)
     def draw(self, surface, xOffset, yOffSet):
         if self.cursor: pg.draw.rect(surface, Block.cursorColor, (self.rect.x + xOffset, self.rect.y + yOffSet, self.rect.w, self.rect.h), 1)
+
+special_blocks = [Block_air, Block_bedrock]
