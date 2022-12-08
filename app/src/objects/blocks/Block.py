@@ -32,3 +32,5 @@ class Block_bedrock(Block):
 class Block_air(Block):
     def __init__(self, x, y):
         super().__init__(x, y, "glass")
+    def draw(self, surface, xOffset, yOffSet):
+        if self.cursor: pg.draw.rect(surface, Block.cursorColor, (self.rect.x + xOffset, self.rect.y + yOffSet, self.rect.w, self.rect.h), 1)

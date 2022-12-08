@@ -4,11 +4,11 @@ from src.objects.landscape.Generator import Generator
 class Landscape:
     columns = []
     def __init__(self, maxYBlocks):
+        self.maxYBlocks = maxYBlocks
         self.yHigher, self.yLower = maxYBlocks * Block.HEIGHT // 2, -maxYBlocks * Block.HEIGHT // 2
         self.leftEdge, self.rightEdge = 0, 0
         self.gen = Generator(self.yLower, self.yHigher)
         self.ySize = self.yHigher + abs(self.yLower)
-        self.addColumn(0, offset = False)
 
     def addColumn(self, y, offset = True, right = True):
         if right:
@@ -19,6 +19,7 @@ class Landscape:
             self.leftEdge -= Block.WIDTH
 
     def preGenerate(self, countLeft, countRight):
+        if len(self.columns) == 0: self.addColumn(0, offset = False)
         for i in range(countLeft):
             self.addColumn(self.columns[-1].y, right = False)
         for i in range(countRight):

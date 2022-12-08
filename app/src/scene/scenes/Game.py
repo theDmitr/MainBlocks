@@ -6,13 +6,16 @@ from src.objects.landscape.Landscape import Landscape
 from src.objects.camera.Camera import Camera
 from src.objects.entity.creature.Player import Player
 from src.objects.blocks.Block import Block, Block_bedrock, Block_air
+from src.objects.landscape.MapLoader import MapLoader
 pg.init()
 
 FPS = 60
 clock = Clock()
 edges = (WIDTH // Block.WIDTH // 2, HEIGHT // Block.HEIGHT // 2)
+
 landscape = Landscape(100)
 landscape.preGenerate(edges[0], edges[0])
+#landscape = MapLoader.getMapFromFile("myMap")
 
 player = Player(landscape.columns[edges[0]].x, landscape.columns[edges[0]].y - Player.HEIGHT)
 camera = Camera(player.rect)
@@ -54,15 +57,15 @@ class Game:
         elif keys[pg.K_s]: player.moveY = player.speed
         else: player.moveY = 0
         
-        for column in landscape.columns[leftHalf : rightHalf]:
-            for block in column.blocks[:]:
+        for indexColumn, column in enumerate(landscape.columns[leftHalf : rightHalf]):
+            for indexBlock, block in enumerate(column.blocks[:]):
                 if mouseClick:
                     if block.cursor:
                         if mouseButton == 1 and block.rect.collidepoint((mouseClick[0] + camera.xOffset, mouseClick[1] + camera.yOffset)) and not isinstance(block, Block_bedrock) and not isinstance(block, Block_air): 
-                            column.blocks[column.blocks.index(block)] = Block_air(block.rect.x, block.rect.y)
+                            column.blocks[indexBlock] = Block_air(block.rect.x, block.rect.y)
                             continue
-                        if mouseButton == 3 and player.handItem and isinstance(block, Block_air) and block.rect.collidepoint((mouseClick[0] + camera.xOffset, mouseClick[1] + camera.yOffset)):
-                            column.blocks[column.blocks.index(block)] = player.handItem(block.rect.x, block.rect.y)
+                        if mouseButton == 3 and player.handItem and isinstance(block, Block_air) and block.rect.collidepoint((mouseClick[0] + camera.xOffset, mouseClick[1] + camera.yOffset)) and not block.rect.colliderect(player):
+                            column.blocks[indexBlock] = player.handItem(block.rect.x, block.rect.y)
                 
                 if block.rect.collidepoint((pg.mouse.get_pos()[0] + camera.xOffset, pg.mouse.get_pos()[1] + camera.yOffset)): block.cursor = True
                 else: block.cursor = False

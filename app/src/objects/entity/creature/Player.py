@@ -2,8 +2,8 @@ import pygame as pg
 from src.objects.blocks.Block import Block
 
 class Player:
-    WIDTH = Block.WIDTH
-    HEIGHT = Block.HEIGHT * 2
+    WIDTH = Block.WIDTH // 1.1
+    HEIGHT = Block.HEIGHT * 1.9
     blockBreakLenght = 4
     handItem = None
     def __init__(self, x, y):
