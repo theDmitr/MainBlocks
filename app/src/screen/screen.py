@@ -5,13 +5,9 @@ pg.init()
 
 class Screen:
     pg.display.set_caption(TITLE)
-    screen = pg.display.set_mode((WIDTH, HEIGHT))
-    sceneControl = None
-    def setSceneControl(scene):
-        Screen.sceneControl = scene
-    def playScene():
-        Screen.sceneControl.playCurrentScene(Screen.screen)
-    def getScreenSize():
-        return (Screen.screen.get_width(), Screen.screen.get_height())
-    def getScreenRect():
-        return Screen.screen.get_rect()
+    screen = pg.display.set_mode((WIDTH, HEIGHT), vsync = 1)
+    scene = None
+    def setScene(scene): 
+        Screen.scene = scene
+    def playScene(): 
+        Screen.scene.play(surface = Screen.screen)

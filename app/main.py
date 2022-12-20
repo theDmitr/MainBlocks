@@ -1,9 +1,7 @@
-from src.scene.scene import Scene
-from src.scene.scenes.Game import Game
 from src.screen.screen import Screen
+from src.scenes.Game import Game
 
-Screen.setSceneControl(Scene)
-Scene.setCurrentScene(Game)
+Screen.setScene(Game)
 
 while True: 
     Screen.playScene()
